@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const Image = sequelize.define(
-    "Image",
+    'image',
     {
       imageId: {
         type: DataTypes.INTEGER.UNSIGNED,
@@ -18,23 +18,24 @@ module.exports = (sequelize, DataTypes) => {
       },
       createdAt: {
         type: DataTypes.DATE,
-        defaultValue: DataTypes.fn("NOW"),
+        defaultValue: DataTypes.fn('NOW'),
         allowNull: false,
       },
       updatedAt: {
         type: DataTypes.DATE,
-        defaultValue: DataTypes.fn("NOW"),
+        defaultValue: DataTypes.fn('NOW'),
         allowNull: false,
       },
     },
     {
-      charset: "utf8",
-      collate: "utf8_general_ci",
+      tableName: 'images',
+      charset: 'utf8',
+      collate: 'utf8_general_ci',
     }
   );
 
   Image.associate = (db) => {
-    db.Image.belongsTo(db.Post, { foreignKey: "postId", targetKey: "postId" });
+    db.Image.belongsTo(db.Post, { foreignKey: 'postId', targetKey: 'postId' });
   };
 
   return Image;

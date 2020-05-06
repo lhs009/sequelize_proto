@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const Comment = sequelize.define(
-    "Comment",
+    'comment',
     {
       commentId: {
         type: DataTypes.INTEGER.UNSIGNED,
@@ -22,29 +22,30 @@ module.exports = (sequelize, DataTypes) => {
       },
       createdAt: {
         type: DataTypes.DATE,
-        defaultValue: DataTypes.fn("NOW"),
+        defaultValue: DataTypes.fn('NOW'),
         allowNull: false,
       },
       updatedAt: {
         type: DataTypes.DATE,
-        defaultValue: DataTypes.fn("NOW"),
+        defaultValue: DataTypes.fn('NOW'),
         allowNull: false,
       },
     },
     {
-      charset: "utf8mb4",
-      collate: "utf8mb4_general_ci",
+      tableName: 'comments',
+      charset: 'utf8mb4',
+      collate: 'utf8mb4_general_ci',
     }
   );
 
   Comment.associate = (db) => {
     db.Comment.belongsTo(db.User, {
-      foreignKey: "userId",
-      targetKey: "userId",
+      foreignKey: 'userId',
+      targetKey: 'userId',
     });
     db.Comment.belongsTo(db.Post, {
-      foreignKey: "postId",
-      targetKey: "postId",
+      foreignKey: 'postId',
+      targetKey: 'postId',
     });
   };
 

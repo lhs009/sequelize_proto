@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
-    "User",
+    'user',
     {
       userId: {
         type: DataTypes.INTEGER.UNSIGNED,
@@ -22,41 +22,42 @@ module.exports = (sequelize, DataTypes) => {
       },
       createdAt: {
         type: DataTypes.DATE,
-        defaultValue: DataTypes.fn("NOW"),
+        defaultValue: DataTypes.fn('NOW'),
         allowNull: false,
       },
       updatedAt: {
         type: DataTypes.DATE,
-        defaultValue: DataTypes.fn("NOW"),
+        defaultValue: DataTypes.fn('NOW'),
         allowNull: false,
       },
     },
     {
-      charset: "utf8",
-      collate: "utf8_general_ci",
+      tableName: 'users',
+      charset: 'utf8',
+      collate: 'utf8_general_ci',
     }
   );
 
   User.associate = (db) => {
-    db.User.hasMany(db.Post, { foreignKey: "userId", sourceKey: "userId" });
-    db.User.hasMany(db.Comment, { foreignKey: "userId", sourceKey: "userId" });
+    db.User.hasMany(db.Post, { foreignKey: 'userId', sourceKey: 'userId' });
+    db.User.hasMany(db.Comment, { foreignKey: 'userId', sourceKey: 'userId' });
     db.User.belongsToMany(db.User, {
-      through: "Follows",
-      as: "followers",
-      foreignKey: "followingId",
-      targetKey: "userId",
+      through: 'follows',
+      as: 'followers',
+      foreignKey: 'followingId',
+      targetKey: 'userId',
     });
     db.User.belongsToMany(db.User, {
-      through: "Follows",
-      as: "followings",
-      foreignKey: "followerId",
-      targetKey: "userId",
+      through: 'follows',
+      as: 'followings',
+      foreignKey: 'followerId',
+      targetKey: 'userId',
     });
     db.User.belongsToMany(db.Post, {
-      through: "Likes",
-      as: "liked",
-      foreignKey: "userId",
-      otherKey: "postId",
+      through: 'likes',
+      as: 'liked',
+      foreignKey: 'userId',
+      otherKey: 'postId',
     });
   };
 
